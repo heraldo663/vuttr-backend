@@ -36,7 +36,7 @@ class App {
   }
 
   routes() {
-    this.server.use(require("./routes"));
+    this.server.use("/api/v1", require("./routes"));
   }
 
   exception() {

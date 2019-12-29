@@ -30,7 +30,7 @@ describe("/tools", () => {
   });
 
   it("Should create a tool", async done => {
-    const res = await server.post("/tools").send(tool);
+    const res = await server.post("/api/v1/tools").send(tool);
 
     expect(res.status).toBe(201);
     expect(res.body.title).toBe(tool.title);
@@ -43,7 +43,7 @@ describe("/tools", () => {
   });
 
   it("Should fail to create a tool without title", async done => {
-    const res = await server.post("/tools").send({ tool, title: "" });
+    const res = await server.post("/api/v1/tools").send({ tool, title: "" });
 
     expect(res.status).toBe(400);
 
@@ -51,7 +51,7 @@ describe("/tools", () => {
   });
 
   it("Should fail to create a tool without link", async done => {
-    const res = await server.post("/tools").send({ tool, link: "" });
+    const res = await server.post("/api/v1/tools").send({ tool, link: "" });
 
     expect(res.status).toBe(400);
 
@@ -59,7 +59,7 @@ describe("/tools", () => {
   });
 
   it("Should get all tools", async done => {
-    const res = await server.get("/tools");
+    const res = await server.get("/api/v1/tools");
 
     expect(res.status).toBe(200);
     expect(res.body.tools.length).toBeGreaterThan(2);
@@ -72,7 +72,7 @@ describe("/tools", () => {
   });
 
   it("Should get all tools that contains the given tag", async done => {
-    const res = await server.get("/tools").query({ tag: "test1" });
+    const res = await server.get("/api/v1/tools").query({ tag: "test1" });
 
     expect(res.status).toBe(200);
     expect(res.body.tools.length).toBeGreaterThan(2);
@@ -85,7 +85,7 @@ describe("/tools", () => {
   });
 
   it("Should delete a tool by id", async done => {
-    const res = await server.delete(`/tools/${tools[0]._id}`);
+    const res = await server.delete(`/api/v1/tools/${tools[0]._id}`);
 
     expect(res.status).toBe(204);
 
