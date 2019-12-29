@@ -1,5 +1,5 @@
 const supertest = require("supertest");
-const app = require("../../src/app");
+const { server: app } = require("../../src/app");
 
 const server = supertest(app);
 const user = {
