@@ -22,8 +22,6 @@ let tool = {
 };
 
 describe("/tools", () => {
-
-
   beforeAll(async () => {
     await toolFactory({}, 3);
     await toolFactory({ tags: ["test1"] }, 3);
@@ -38,6 +36,22 @@ describe("/tools", () => {
     expect(res.body.description).toBe(tool.description);
     expect(res.body.tags).toEqual(expect.arrayContaining(tool.tags));
     expect(res.body).toHaveProperty("_id");
+
+    done();
+  });
+
+  it("Should fail to create a tool without title", async done => {
+    const res = await server.post("/tools").send({ tool, title: "" });
+
+    expect(res.status).toBe(400);
+
+    done();
+  });
+
+  it("Should fail to create a tool without link", async done => {
+    const res = await server.post("/tools").send({ tool, link: "" });
+
+    expect(res.status).toBe(400);
 
     done();
   });
