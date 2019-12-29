@@ -6,14 +6,16 @@ const ToolSchema = new mongoose.Schema({
     required: true
   },
   description: {
-    type: String
+    type: String,
+    default: null
   },
   link: {
     type: String,
     required: true
   },
   tags: {
-    type: Array
+    type: Array,
+    default: []
   },
   createdAt: {
     type: Date,
