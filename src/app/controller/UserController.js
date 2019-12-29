@@ -2,6 +2,13 @@
 const User = require("../model/User");
 
 class UserController {
+  /**
+   * Store a new user in database
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @return user
+   */
   async store(req, res) {
     const { email } = req.body;
 

@@ -2,6 +2,13 @@
 const User = require("../model/User");
 
 class SessionController {
+  /**
+   * Sing a user in generating the token
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @return user wit h jwt token
+   */
   async store(req, res) {
     const { email, password } = req.body;
 
