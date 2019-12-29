@@ -21,10 +21,12 @@ let tool = {
   ]
 };
 
+let tools;
+
 describe("/tools", () => {
   beforeAll(async () => {
     await toolFactory({}, 3);
-    await toolFactory({ tags: ["test1"] }, 3);
+    tools = await toolFactory({ tags: ["test1"] }, 3);
   });
 
   it("Should create a tool", async done => {
@@ -83,8 +85,7 @@ describe("/tools", () => {
   });
 
   it("Should delete a tool by id", async done => {
-    const tool = await toolFactory();
-    const res = await server.delete(`/tools/${tool._id}`);
+    const res = await server.delete(`/tools/${tools[0]._id}`);
 
     expect(res.status).toBe(204);
 
