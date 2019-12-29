@@ -1,6 +1,6 @@
 const supertest = require("supertest");
 
-const toolFactory = require("../factories/tools");
+const toolFactory = require("../helpers/factories/tools");
 const { server: app } = require("../../src/app");
 
 const server = supertest(app);
@@ -22,6 +22,13 @@ let tool = {
 };
 
 describe("/tools", () => {
+
+
+  beforeAll(async () => {
+    await toolFactory({}, 3);
+    await toolFactory({ tags: ["test1"] }, 3);
+  });
+
   it("Should create a tool", async done => {
     const res = await server.post("/tools").send(tool);
 
@@ -30,16 +37,17 @@ describe("/tools", () => {
     expect(res.body.link).toBe(tool.link);
     expect(res.body.description).toBe(tool.description);
     expect(res.body.tags).toEqual(expect.arrayContaining(tool.tags));
-    expect(res.body).toHaveProperty("id");
+    expect(res.body).toHaveProperty("_id");
 
     done();
   });
 
   it("Should get all tools", async done => {
     const res = await server.get("/tools");
-    await toolFactory({}, 3);
+
+    expect(res.status).toBe(200);
     expect(res.body.tools.length).toBeGreaterThan(2);
-    expect(res.body.tools[0]).toHaveProperty("id");
+    expect(res.body.tools[0]).toHaveProperty("_id");
     expect(res.body.tools[0]).toHaveProperty("title");
     expect(res.body.tools[0]).toHaveProperty("link");
     expect(res.body.tools[0]).toHaveProperty("description");
@@ -49,9 +57,10 @@ describe("/tools", () => {
 
   it("Should get all tools that contains the given tag", async done => {
     const res = await server.get("/tools").query({ tag: "test1" });
-    await toolFactory({ tool: { tags: ["test1"] } }, 3);
+
+    expect(res.status).toBe(200);
     expect(res.body.tools.length).toBeGreaterThan(2);
-    expect(res.body.tools[0]).toHaveProperty("id");
+    expect(res.body.tools[0]).toHaveProperty("_id");
     expect(res.body.tools[0]).toHaveProperty("title");
     expect(res.body.tools[0]).toHaveProperty("link");
     expect(res.body.tools[0]).toHaveProperty("description");

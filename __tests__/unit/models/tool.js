@@ -1,7 +1,8 @@
 const faker = require("faker");
 
 const Tool = require("../../../src/app/model/Tool");
-const toolFactory = require("../../factories/tools");
+const toolFactory = require("../../helpers/factories/tools");
+
 const database = require("../../../src/database");
 
 const tool = {

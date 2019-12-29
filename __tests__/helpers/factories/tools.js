@@ -1,4 +1,4 @@
-const Tool = require("../../src/app/model/Tool");
+const Tool = require("../../../src/app/model/Tool");
 const faker = require("faker");
 
 const toolFactory = async (tool = {}, qtd = 1) => {
