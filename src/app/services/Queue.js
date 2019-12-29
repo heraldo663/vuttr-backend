@@ -1,0 +1,14 @@
+const kue = require("kue");
+const Sentry = require("@sentry/node");
+const jobs = require("../jobs");
+const redisConfig = require("../../config/redis");
+
+const Queue = kue.createQueue({
+  redis: redisConfig.redis
+});
+
+Queue.process(jobs.PurchaseMail.key, jobs.PurchaseMail.handle);
+
+Queue.on("error", Sentry.captureException);
+
+module.exports = Queue;
