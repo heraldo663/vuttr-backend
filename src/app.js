@@ -37,9 +37,9 @@ class App {
   }
 
   routes() {
-    this.server.use("/api/v1", require("./routes"));
     this.server.use(express.static(__dirname + "/public"));
-    this.server.use((req, res) =>
+    this.server.use("/api/v1", require("./routes"));
+    this.server.get("/", (req, res) =>
       res.sendFile(path.join(__dirname + "/public", "docs.html"))
     );
   }
