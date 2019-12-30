@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/index.js",
+    "start": "node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit",
     "test:models": "cross-env NODE_ENV=test jest ./__tests__/unit/models --detectOpenHandles --forceExit",
