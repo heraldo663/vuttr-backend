@@ -12,13 +12,14 @@ services:
     command: npm start
     volumes:
       - .:/usr/src/app
+      - /usr/src/app/node_modules
 
     restart: always
 
   mongodb:
     image: "mongo:4.2"
     volumes:
-      - ../data:/data/db
+      - ./../data:/data/db
 
     restart: always
 
