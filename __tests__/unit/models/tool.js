@@ -1,5 +1,5 @@
 const faker = require("faker");
-
+const mongoose = require("mongoose");
 const Tool = require("../../../src/app/model/Tool");
 const toolFactory = require("../../helpers/factories/tools");
 
@@ -17,8 +17,9 @@ describe("Model Tool", () => {
     await toolFactory({}, 3);
   });
 
-  afterAll(() => {
-    connection.close();
+  afterAll(async done => {
+    await mongoose.disconnect();
+    done();
   });
 
   it("Shold get all tools with a given tag", async done => {
