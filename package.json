@@ -8,10 +8,13 @@
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
     "test:models": "cross-env NODE_ENV=test jest ./__tests__/unit/models --detectOpenHandles",
-    "test:watch": "cross-env NODE_ENV=test jest --watch"
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "build:docs": "aglio --theme-variables slate  -i docs/vuttr.apib -o src/public/docs.html"
   },
   "devDependencies": {
+    "aglio": "^2.3.0",
     "cross-env": "^6.0.3",
+    "drakov": "^1.0.4",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",

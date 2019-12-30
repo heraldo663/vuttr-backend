@@ -1,0 +1,50 @@
+FORMAT: 1A
+HOST: http://127.0.0.1:4000/api/v1
+
+# Vuttr
+
+Very Useful Tools to Remember
+
+# Group Tools
+
+## Tools [/tools]
+
+### Tools: List tools [GET]
+
+This resource will list all tools.
+
++ Response 200 (application/json)
+
+  + Attributes (array[StoredTool])
+
+### Tools: Ceate an tool [POST]
+
++ Request
+
+  + Attributes(Tool)
+
+
++ Response 201 (application/json)
+
+  + Attributes (StoredTool)
+
+## Tools [/tools/:id]
+
+### Tools: Delete an tool [DELETE]
+
++ Response 204
+
+
+## Data Structures
+
+### Tool (object)
++ title (string, required): node
++ description (string)
++ link (string, required): https://google.com
++ tags (array[string])
+
+### StoredTool (Tool)
++ createdAt (string)
++ _id (string)
++ _v (number)
+

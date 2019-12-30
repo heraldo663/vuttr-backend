@@ -6,6 +6,7 @@ const cors = require("cors");
 const validate = require("express-validation");
 const Youch = require("youch");
 const Sentry = require("@sentry/node");
+const path = require("path");
 
 const sentry = require("./config/sentry");
 const database = require("./database");
@@ -36,7 +37,11 @@ class App {
   }
 
   routes() {
-    this.server.use(require("./routes"));
+    this.server.use("/api/v1", require("./routes"));
+    this.server.use(express.static(__dirname + "/public"));
+    this.server.use((req, res) =>
+      res.sendFile(path.join(__dirname + "/public", "docs.html"))
+    );
   }
 
   exception() {
